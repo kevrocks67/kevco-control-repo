@@ -1,0 +1,53 @@
+class profile::base::ssh_server {
+  # CentOS 7 OpenSSH server configuration
+  if ($facts['os']['family'] == 'RedHat') and ($facts['os']['release']['major'] == '7') {
+    class { 'ssh::server':
+      validate_sshd_file => true,
+      options            => {
+        'Port'                            => '22',
+        'ListenAddress'                   => '0.0.0.0',
+        'Protocol'                        => '2',
+        'SyslogFacility'                  => 'AUTHPRIV',
+        'LogLevel'                        => 'INFO',
+        'MaxAuthTries'                    => '3',
+        'MaxSessions'                     => '5',
+        'AllowUsers'                      => ['root'],
+        #'PermitRootLogin'                 => 'without-password',
+        'PermitRootLogin'                 => 'yes',
+        'HostKey'                         => ['/etc/ssh/ssh_host_ed25519_key', '/etc/ssh/ssh_host_rsa_key'],
+        'PasswordAuthentication'          => 'yes',
+        'PermitEmptyPasswords'            => 'no',
+        'PubkeyAuthentication'            => 'yes',
+        'AuthorizedKeysFile'              => '.ssh/authorized_keys',
+        'KerberosAuthentication'          => 'no',
+        'GSSAPIAuthentication'            => 'yes',
+        'GSSAPICleanupCredentials'        => 'yes',
+        'GSSAPIStrictAcceptorCheck'       => 'yes',
+        'ChallengeResponseAuthentication' => 'no',
+        'HostbasedAuthentication'         => 'no',
+        'IgnoreUserKnownHosts'            => 'yes',
+        'PermitUserEnvironment'           => 'no',
+        'UsePrivilegeSeparation'          => 'yes',
+        'StrictModes'                     => 'yes',
+        'UsePAM'                          => 'yes',
+        'LoginGraceTime'                  => '60',
+        'TCPKeepAlive'                    => 'yes',
+        'AllowAgentForwarding'            => 'no',
+        'AllowTcpForwarding'              => 'no',
+        'PermitTunnel'                    => 'no',
+        'X11Forwarding'                   => 'no',
+        'Compression'                     => 'delayed',
+        'UseDNS'                          => 'no',
+        'Banner'                          => 'none',
+        'PrintMotd'                       => 'no',
+        'PrintLastLog'                    => 'yes',
+        'Subsystem'                       => 'sftp /usr/libexec/openssh/sftp-server',
+  
+        'Ciphers'                         => 'chacha20-poly1305@openssh.com,aes256-gcm@openssh.com,aes128-gcm@openssh.com,aes256-ctr,aes192-ctr,aes128-ctr',
+        'MACs'                            => 'hmac-sha2-256-etm@openssh.com,hmac-sha2-512-etm@openssh.com,umac-128-etm@openssh.com',
+        'KexAlgorithms'                   => 'curve25519-sha256@libssh.org,diffie-hellman-group18-sha512,diffie-hellman-group16-sha512,diffie-hellman-group14-sha256',
+        'HostKeyAlgorithms'               => 'ssh-ed25519,ssh-ed25519-cert-v01@openssh.com,ssh-rsa,ecdsa-sha2-nistp256,ecdsa-sha2-nistp384,ssh-rsa-cert-v01@openssh.com,ssh-dss-cert-v01@openssh.com,ecdsa-sha2-nistp256-cert-v01@openssh.com,ecdsa-sha2-nistp384-cert-v01@openssh.com,ecdsa-sha2-nistp521-cert-v01@openssh.com',
+      },
+    }
+  }
+}

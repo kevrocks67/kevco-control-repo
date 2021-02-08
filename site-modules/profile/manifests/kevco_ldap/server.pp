@@ -1,0 +1,28 @@
+class profile::kevco_ldap::server {
+  class{ 'kevco_ldap' :
+    db_dir                  => lookup('profile::kevco_ldap::server::db_dir'), 
+    db_suffix               => lookup('profile::kevco_ldap::server::db_suffix'), 
+    root_dn                 => lookup('profile::kevco_ldap::server::root_dn'), 
+    root_pw                 => lookup('profile::kevco_ldap::server::root_pw'), 
+    server_role             => lookup('profile::kevco_ldap::server::server_role'), 
+    accesslog_root_pw       => lookup('profile::kevco_ldap::server::accesslog_root_pw'), 
+    accesslog_db_max_size   => lookup('profile::kevco_ldap::server::accesslog_db_max_size', undef, undef, undef), 
+    ca_cert_name            => lookup('profile::kevco_ldap::server::ca_cert_name'), 
+    cert_name               => lookup('profile::kevco_ldap::server::cert_name'), 
+    cert_key_name           => lookup('profile::kevco_ldap::server::cert_key_name'), 
+    db_max_size             => lookup('profile::kevco_ldap::server::db_max_size', undef, undef, undef), 
+    sync_rid                => lookup('profile::kevco_ldap::server::sync_rid'), 
+    sync_provider           => lookup('profile::kevco_ldap::server::sync_provider'), 
+    sync_searchbase         => lookup('profile::kevco_ldap::server::sync_searchbase'), 
+    sync_type               => lookup('profile::kevco_ldap::server::sync_type'), 
+    sync_retry              => lookup('profile::kevco_ldap::server::sync_retry'), 
+    sync_schema_check       => lookup('profile::kevco_ldap::server::sync_schema_check'), 
+    sync_bind_method        => lookup('profile::kevco_ldap::server::sync_bind_method'), 
+    sync_bind_dn            => lookup('profile::kevco_ldap::server::sync_bind_dn'), 
+    sync_bind_creds         => lookup('profile::kevco_ldap::server::sync_bind_creds'), 
+    sync_tls_reqcert        => lookup('profile::kevco_ldap::server::sync_tls_reqcert'), 
+    sync_tls_cert           => lookup('profile::kevco_ldap::server::sync_tls_cert'), 
+    sync_tls_key            => lookup('profile::kevco_ldap::server::sync_tls_key'), 
+    sync_mirror_mode        => lookup('profile::kevco_ldap::server::sync_mirror_mode'), 
+  }
+}
