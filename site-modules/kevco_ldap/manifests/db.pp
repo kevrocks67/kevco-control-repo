@@ -5,6 +5,7 @@ class kevco_ldap::db (
   $root_dn,
   $root_pw,
   $db_max_size        = '10485760',
+  $read_only          = 'false',
   $server_role        = undef,
   $sync_rid           = undef,
   $sync_provider      = undef,
@@ -43,6 +44,7 @@ class kevco_ldap::db (
     rootdn     => $root_dn,
     rootpw     => $root_pw,
     suffix     => $db_suffix,
+    readonly   => $read_only,
     dbmaxsize  => $db_max_size,
     dboptions  => {
       'index' => [

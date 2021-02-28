@@ -11,6 +11,7 @@ class profile::kevco_ldap::server {
     cert_name               => lookup('profile::kevco_ldap::server::cert_name'), 
     cert_key_name           => lookup('profile::kevco_ldap::server::cert_key_name'), 
     db_max_size             => lookup('profile::kevco_ldap::server::db_max_size', undef, undef, undef), 
+    read_only               => lookup('profile::kevco_ldap::server::read_only', undef, undef, false), 
     sync_rid                => lookup('profile::kevco_ldap::server::sync_rid', undef, undef, undef), 
     sync_provider           => lookup('profile::kevco_ldap::server::sync_provider', undef, undef, undef), 
     sync_searchbase         => lookup('profile::kevco_ldap::server::sync_searchbase', undef, undef, undef), 
