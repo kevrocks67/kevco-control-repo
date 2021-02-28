@@ -38,6 +38,7 @@ class kevco_ldap (
     db_suffix               => $db_suffix,
     root_dn                 => $root_dn,
     root_pw                 => $root_pw,
+    server_role             => $server_role,
     sync_rid                => $sync_rid,
     sync_provider           => $sync_provider,
     sync_type               => $sync_type,

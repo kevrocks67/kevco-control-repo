@@ -5,6 +5,7 @@ class kevco_ldap::db (
   $root_dn,
   $root_pw,
   $db_max_size        = '10485760',
+  $server_role        = undef,
   $sync_rid           = undef,
   $sync_provider      = undef,
   $sync_searchbase    = undef,
@@ -20,13 +21,13 @@ class kevco_ldap::db (
   $sync_mirror_mode   = undef,
 ) {
   if $server_role == 'slave' {
-    $sync_conf = "rid=${sync_rid} provider=\"${sync_provider}\" 
-     searchbase=\"${sync_searchbase}\" 
+    $sync_conf = "rid=${sync_rid} provider=\"${sync_provider}\"
+     searchbase=\"${sync_searchbase}\"
      type=${sync_type}
-     retry=\"${sync_retry}\" 
+     retry=\"${sync_retry}\"
      schemachecking=${sync_schema_check}
      bindmethod=${sync_bind_method}
-     binddn=\"${sync_bind_dn}\" 
+     binddn=\"${sync_bind_dn}\"
      credentials=${sync_bind_creds}
      tls_reqcert=${sync_tls_reqcert}
      tls_cert=${sync_tls_cert}
