@@ -1,5 +1,5 @@
 mod "openldap",
-    :git => 'git@github.com:kevrocks67/puppet-openldap.git'
+    :git => 'http://github.com/kevrocks67/puppet-openldap'
 mod "camptocamp-systemd", '2.9.0'
 mod "herculesteam-augeasproviders_core", '2.6.0'
 mod "herculesteam-augeasproviders_shellvar", '4.0.0'
