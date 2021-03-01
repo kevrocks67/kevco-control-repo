@@ -4,6 +4,7 @@ class profile::kevco_ldap::server {
     db_suffix               => lookup('profile::kevco_ldap::server::db_suffix'), 
     root_dn                 => lookup('profile::kevco_ldap::server::root_dn'), 
     root_pw                 => lookup('profile::kevco_ldap::server::root_pw'), 
+    sync_pw                 => lookup('profile::kevco_ldap::server::sync_pw'),
     server_role             => lookup('profile::kevco_ldap::server::server_role'), 
     accesslog_root_pw       => lookup('profile::kevco_ldap::server::accesslog_root_pw'), 
     accesslog_db_max_size   => lookup('profile::kevco_ldap::server::accesslog_db_max_size', undef, undef, undef), 
