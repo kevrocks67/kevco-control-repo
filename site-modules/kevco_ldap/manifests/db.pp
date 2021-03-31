@@ -4,23 +4,23 @@ class kevco_ldap::db (
   $db_suffix,
   $root_dn,
   $root_pw,
-  $sync_pw            = undef,
-  $db_max_size        = '10485760',
-  $read_only          = 'false',
-  $server_role        = undef,
-  $sync_rid           = undef,
-  $sync_provider      = undef,
-  $sync_searchbase    = undef,
-  $sync_type          = undef,
-  $sync_retry         = undef,
-  $sync_schema_check  = undef,
-  $sync_bind_method   = undef,
-  $sync_bind_dn       = undef,
-  $sync_bind_creds    = undef,
-  $sync_tls_reqcert   = undef,
-  $sync_tls_cert      = undef,
-  $sync_tls_key       = undef,
-  $sync_mirror_mode   = undef,
+  $sync_pw,
+  $db_max_size,
+  $read_only,
+  $server_role,
+  $sync_rid,
+  $sync_provider,
+  $sync_searchbase,
+  $sync_type,
+  $sync_retry,
+  $sync_schema_check,
+  $sync_bind_method,
+  $sync_bind_dn,
+  $sync_bind_creds,
+  $sync_tls_reqcert,
+  $sync_tls_cert,
+  $sync_tls_key,
+  $sync_mirror_mode,
 ) {
   if $server_role == 'slave' {
     $sync_conf = "rid=${sync_rid} provider=\"${sync_provider}\"
@@ -35,20 +35,20 @@ class kevco_ldap::db (
      tls_cert=${sync_tls_cert}
      tls_key=${sync_tls_key}"
   } else {
-     $sync_conf = undef
+    $sync_conf = undef
   }
 
   openldap::server::database { $db_suffix:
-    ensure     => present,
-    directory  => $db_dir,
-    backend    => 'mdb',
-    rootdn     => $root_dn,
-    rootpw     => $root_pw,
-    syncpw     => $sync_pw,
-    suffix     => $db_suffix,
-    readonly   => $read_only,
-    dbmaxsize  => $db_max_size,
-    dboptions  => {
+    ensure    => present,
+    directory => $db_dir,
+    backend   => 'mdb',
+    rootdn    => $root_dn,
+    rootpw    => $root_pw,
+    syncpw    => $sync_pw,
+    suffix    => $db_suffix,
+    readonly  => $read_only,
+    dbmaxsize => $db_max_size,
+    dboptions => {
       'index' => [
         'default eq',
         'krbPrincipalName eq',
@@ -57,6 +57,6 @@ class kevco_ldap::db (
         'ou,cn,mail,surname,givenname eq,pres,sub',
       ],
     },
-    syncrepl   => $sync_conf,
+    syncrepl  => $sync_conf,
   }
 }
