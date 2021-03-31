@@ -8,4 +8,9 @@ class profile::monitoring::grafana {
       },
     },
   }
+  firewalld_port { 'grafana':
+    ensure   => present,
+    port     => lookup('profile::grafana::http_port', undef, undef, 3000),
+    protocol => 'tcp',
+  }
 }

@@ -4,7 +4,7 @@ class kevco_ldap::configure (
   $cert_name     = undef,
   $cert_key_name = undef,
 ){
-  
+
   file { '/etc/openldap/certs':
     ensure  => directory,
     require => Package['openldap-servers'],
@@ -14,7 +14,7 @@ class kevco_ldap::configure (
     ensure  => directory,
     require => Package['openldap-servers'],
   }
-  
+
   # Upload CA cert
   file { "/etc/openldap/cacerts/${ca_cert_name}":
     ensure  => file,
@@ -24,7 +24,7 @@ class kevco_ldap::configure (
     mode    => '0640',
     require => File['/etc/openldap/cacerts'],
   }
-  
+
   # Upload ldaps cert
   file { "/etc/openldap/certs/${cert_name}":
     ensure  => file,
@@ -34,7 +34,7 @@ class kevco_ldap::configure (
     mode    => '0640',
     require => File['/etc/openldap/certs'],
   }
-  
+
   # Upload ldaps key
   file { "/etc/openldap/certs/${cert_key_name}":
     ensure  => file,
@@ -44,7 +44,7 @@ class kevco_ldap::configure (
     mode    => '0640',
     require => File['/etc/openldap/certs'],
   }->
-  # Set up ldaps	
+  # Set up ldaps
   class { 'openldap::server':
     ldap_ifs  => ["${facts['networking']['interfaces']['eth0']['ip']}:389/"],
     ldaps_ifs => ["${facts['networking']['interfaces']['eth0']['ip']}:636/"],
@@ -52,11 +52,11 @@ class kevco_ldap::configure (
     ssl_key   => "/etc/openldap/certs/${cert_key_name}",
   }
   #class { '::openldap::utils': }
-  
+
   package { 'perl-Archive-Zip':
     ensure => installed,
   }
-  
+
   # Delete deprecated hdb
   openldap::server::database { 'dc=my-domain,dc=com':
     ensure => absent,
@@ -67,7 +67,7 @@ class kevco_ldap::configure (
     port     => 389,
     protocol => 'tcp',
   }
-  
+
   firewalld_port { 'ldaps port':
     ensure   => present,
     port     => 636,
