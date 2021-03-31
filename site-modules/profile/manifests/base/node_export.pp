@@ -1,3 +1,3 @@
-class { 'node_export':
+class profile::base::node_export {
   include prometheus::node_exporter
 }
