@@ -5,7 +5,7 @@ class role::ldap_master {
   include profile::base::ssh_server
   include profile::base::ssh_client
   include profile::base::users
-  include profile::base::node_export
+  include profile::monitoring::node_export
   include profile::kevco_ldap::server
   include profile::kevco_ldap::client
 }
